@@ -28,11 +28,21 @@ class TaskTest extends TestCase
     }
 
     /** @test */
-function it_can_be_completed()
+function it_can_be_marked_as_completed()
 {
     $task = factory(Task::class)->create();
     $this->assertFalse($task->completed);
     $task->complete();
     $this->assertTrue($task->fresh()->completed);
 }
+
+    /** @test */
+function it_can_be_marked_as_incomplete()
+{
+    $task = factory(Task::class)->create(['completed'=>true]);
+    $this->assertTrue($task->completed);
+    $task->incomplete();
+    $this->assertFalse($task->fresh()->completed);
+}
+
 }
