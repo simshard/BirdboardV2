@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">Dashboard</div>
 
-                <div class="card-body">
+                <div id="targ" class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -20,4 +20,10 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+console.log('hello');
+$(document).ready(function(){
+$("#targ").text("Hi! jquery loaded");
+});
+</script>
 @endsection

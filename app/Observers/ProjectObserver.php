@@ -16,7 +16,7 @@ class ProjectObserver
     public function created(Project $project)
     {
       //$this->recordActivity('created', $project);
-      $project->recordActivity('created');
+      $project->recordActivity('project_created');
     }
 
     /**
@@ -28,9 +28,9 @@ class ProjectObserver
     public function updated(Project $project)
     {
       //$this->recordActivity('updated', $project);
-       $project->recordActivity('updated');
+       $project->recordActivity('project_updated');
     }
 
-   
+
 
 }

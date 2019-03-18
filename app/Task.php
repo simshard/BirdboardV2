@@ -27,16 +27,7 @@ class Task extends Model
         protected $casts = [
             'completed' => 'boolean'
         ];
-        /**
-         * Boot the model.
-         */
-        protected static function boot()
-        {
-            parent::boot();
-            static::created(function ($task) {
-                $task->project->recordActivity('created_task');
-            });
-        }
+        
         /**
          * Mark the task as complete.
          */

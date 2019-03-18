@@ -62,6 +62,11 @@
                 margin-bottom: 30px;
             }
         </style>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
@@ -80,19 +85,19 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
+                <div id="targ" class="title m-b-md">
                     Laravel
                 </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+
             </div>
         </div>
+
+        <script type="text/javascript">
+        console.log('hello');
+        $(document).ready(function(){
+        $("#targ").text("Hello world!");
+        });
+        </script>
     </body>
 </html>

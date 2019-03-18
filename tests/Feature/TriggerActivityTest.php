@@ -17,7 +17,7 @@ class ActivityFeedTest extends TestCase
     {
        $project = ProjectFactory::create();
        $this->assertCount(1, $project->activity);
-      $this->assertEquals('created', $project->activity[0]->description);
+      $this->assertEquals('project_created', $project->activity[0]->description);
     }
 
     /** @test */
@@ -27,7 +27,7 @@ class ActivityFeedTest extends TestCase
        $project->update(['title'=>'changed']);
 
        $this->assertCount(2, $project->activity);
-       $this->assertEquals('updated', $project->activity->last()->description);
+       $this->assertEquals('project_updated', $project->activity->last()->description);
     }
 
     /** @test */
@@ -35,8 +35,9 @@ class ActivityFeedTest extends TestCase
     {
         $project = ProjectFactory::create();
         $project->addTask('Some task');
-        $this->assertCount(2, $project->activity);
-        $this->assertEquals('created_task', $project->activity->last()->description);
+        //dd($project->activity);
+         $this->assertCount(2, $project->activity);
+       $this->assertEquals('created_task', $project->activity->last()->description);
     }
     /** @test */
     function completing_a_task()
@@ -69,7 +70,13 @@ class ActivityFeedTest extends TestCase
       $this->assertEquals('incompleted_task', $project->activity->last()->description);
     }
 
-
+    /** @test */
+    function deleting_a_task()
+    {
+      $project = ProjectFactory::withTasks(1)->create();
+      $project->tasks[0]->delete();
+      $this->assertCount(3, $project->activity);
+    }
 
 
 
