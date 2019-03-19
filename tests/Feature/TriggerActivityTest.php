@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Project;
+use App\Task;
 use Facades\Tests\Setup\ProjectFactory;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -17,7 +18,7 @@ class ActivityFeedTest extends TestCase
     {
        $project = ProjectFactory::create();
        $this->assertCount(1, $project->activity);
-      $this->assertEquals('project_created', $project->activity[0]->description);
+      $this->assertEquals('created', $project->activity[0]->description);
     }
 
     /** @test */
@@ -27,7 +28,10 @@ class ActivityFeedTest extends TestCase
        $project->update(['title'=>'changed']);
 
        $this->assertCount(2, $project->activity);
-       $this->assertEquals('project_updated', $project->activity->last()->description);
+
+
+
+       $this->assertEquals('updated', $project->activity->last()->description);
     }
 
     /** @test */
@@ -37,7 +41,13 @@ class ActivityFeedTest extends TestCase
         $project->addTask('Some task');
         //dd($project->activity);
          $this->assertCount(2, $project->activity);
-       $this->assertEquals('created_task', $project->activity->last()->description);
+         tap($project->activity->last(), function ($activity)
+         {
+          $this->assertEquals('created_task', $activity->description);
+          $this->assertInstanceOf(Task::class, $activity->subject);
+          $this->assertEquals('Some task', $activity->subject->body);
+         });
+
     }
     /** @test */
     function completing_a_task()
@@ -49,7 +59,11 @@ class ActivityFeedTest extends TestCase
                 'completed' => true,
             ]);
         $this->assertCount(3, $project->activity);
-        $this->assertEquals('completed_task', $project->activity->last()->description);
+
+                tap($project->activity->last(), function ($activity) {
+                    $this->assertEquals('completed_task', $activity->description);
+                    $this->assertInstanceOf(Task::class, $activity->subject);
+                });
     }
     /** @test */
     function uncompleting_a_task()

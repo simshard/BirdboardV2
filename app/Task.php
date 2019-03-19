@@ -27,14 +27,14 @@ class Task extends Model
         protected $casts = [
             'completed' => 'boolean'
         ];
-        
+
         /**
          * Mark the task as complete.
          */
         public function complete()
         {
             $this->update(['completed' => true]);
-            $this->project->recordActivity('completed_task');
+            $this->recordActivity('completed_task');
         }
 
         /**
@@ -43,7 +43,7 @@ class Task extends Model
         public function incomplete()
         {
             $this->update(['completed' => false]);
-            $this->project->recordActivity('incompleted_task');
+            $this->recordActivity('incompleted_task');
         }
     /**
      * Get the owning project.
@@ -64,4 +64,23 @@ class Task extends Model
     {
         return "/projects/{$this->project->id}/tasks/{$this->id}";
     }
+
+    /**
+   * Record activity for a task.
+   *
+   * @param string $type
+   */
+      public function recordActivity($description)
+      {
+        $this->activity()->create([
+          'project_id'=>$this->project_id,
+          'description'=>$description
+        ]);
+
+      }
+
+      public function activity()
+      {
+      return $this->morphMany(Activity::class,'subject')->latest();
+      }
 }

@@ -69,6 +69,7 @@ function a_user_can_update_a_projects_general_notes()
     /** @test */
     public function a_user_can_view_their_project()
     {
+      $this->withoutExceptionHandling();
       $project = ProjectFactory::create();
       $this->actingAs($project->owner)
             ->get($project->path())
