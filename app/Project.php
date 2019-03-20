@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
+  use RecordsActivity;
     /**
      * Attributes to guard against mass assignment.
      *
@@ -13,12 +14,6 @@ class Project extends Model
      */
     protected $guarded = [];
 
-    /**
-     * The project's old attributes.
-     *
-     * @var array
-     */
-    public $old = [];
 
     /**
      *  The path to the project.
@@ -61,40 +56,6 @@ class Project extends Model
         $task= $this->tasks()->create(compact('body'));
 
          return   $task;
-    }
-
-    /**
- * Record activity for a project.
- *
- * @param string $type
- */
-public function recordActivity($description)
-{
-    $this->activity()->create([
-            'description' => $description,
-            'changes' => $this->activityChanges($description)
-        ]);
-}
-
-/**
- * Fetch the changes to the model.
- *
- * @param  string $description
- * @return array|null
- */
-    protected function activityChanges($description)
-    {
-        if ($description == 'updated') {
-            return [
-                'before' => array_except(array_diff($this->old, $this->getAttributes()), 'updated_at'),
-                'after' => array_except($this->getChanges(), 'updated_at')
-            ];
-        }
-    }
-
-    public function activity()
-    {
-    return $this->hasMany(Activity::class)->latest();
     }
 
 }
