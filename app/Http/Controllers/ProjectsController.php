@@ -92,5 +92,14 @@ class ProjectsController extends Controller
                'notes' => 'nullable'
            ]);
        }
+/**
+ * DELETE a project
+ */
+public function destroy(Project $project)
+{
+  $this->authorize('update', $project);
+  $project->delete();
+  return redirect('/projects');
+}
 
 }
