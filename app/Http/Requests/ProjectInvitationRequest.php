@@ -8,6 +8,13 @@ use Illuminate\Validation\Rule;
 
 class ProjectInvitationRequest extends FormRequest
 {
+  /**
+   * The key to be used for the view error bag.
+   *
+   * @var string
+   */
+  protected $errorBag = 'invitations';
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -15,7 +22,7 @@ class ProjectInvitationRequest extends FormRequest
      */
     public function authorize()
     {
-        return Gate::allows('update', $this->route('project'));
+        return Gate::allows('manage', $this->route('project'));
     }
 
     /**

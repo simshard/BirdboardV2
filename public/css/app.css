@@ -584,6 +584,18 @@ table {
   box-shadow: 0 2px 7px 0 #b0eaff;
 }
 
+.deletebutton {
+  background-color: transparent;
+  color: #47cdff;
+  font-size: .75rem;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-width: 1px;
+  border-color: #47cdff;
+}
+
 .card {
   background-color: #fff;
   padding: 1.25rem;
