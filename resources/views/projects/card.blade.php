@@ -4,6 +4,7 @@
     </h3>
 
     <div class="text-grey mb-4 flex-1">{{ str_limit($project->description, 100) }}</div>
+@can('manage',$project)
   <footer>
     <form method="POST" action="{{ $project->path() }}" class="text-right">
       @csrf
@@ -12,4 +13,5 @@
 
   </form>
   </footer>
+@endcan
 </div>
