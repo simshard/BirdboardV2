@@ -1,5 +1,5 @@
 // Variables
-@import 'variables';
+//@import 'variables';
 
 /**
  * This injects Tailwind's base styles, which is a combination of
@@ -13,7 +13,8 @@
  * @import "tailwindcss/preflight";
  */
 @tailwind preflight;
-
+@import 'themes/light';
+@import 'themes/dark';
 /**
  * This injects any component classes registered by plugins.
  *
@@ -21,7 +22,7 @@
  *
  * @import "tailwindcss/components";
  */
-@tailwind components;
+//@tailwind components;
 
 /**
  * Here you would add any of your custom component classes; stuff that you'd
@@ -38,21 +39,16 @@
  * @import "components/buttons";
  * @import "components/forms";
  */
+ @import 'components/button';
 
-.section {
-    @apply .px-4;
-}
+ @import 'components/card';
 
-.button {
-    @apply .bg-blue .text-white .no-underline .rounded-lg .text-sm .py-2 .px-5;
-    box-shadow: 0 2px 7px 0 #b0eaff;
-}
-.deletebutton{
-  @apply .bg-transparent .text-blue  .text-xs  .py-2 .px-4 .border .border-blue  ;
-}
-.card {
-    @apply .bg-white .p-5 .rounded-lg .shadow;
-}
+
+ .section {
+    @apply .px-8;
+ }
+
+ 
 
 /**
  * This injects all of Tailwind's utility classes, generated based on your
@@ -63,18 +59,3 @@
  * @import "tailwindcss/utilities";
  */
 @tailwind utilities;
-
-/**
- * Here you would add any custom utilities you need that don't come out of the
- * box with Tailwind.
- *
- * Example :
- *
- * .bg-pattern-graph-paper { ... }
- * .skew-45 { ... }
- *
- * Or if using a preprocessor or `postcss-import`:
- *
- * @import "utilities/background-patterns";
- * @import "utilities/skew-transforms";
- */
